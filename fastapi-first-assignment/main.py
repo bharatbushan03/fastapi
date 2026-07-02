@@ -88,3 +88,12 @@ def get_student_by_id(student_id: int):
         'student_id': student_id,
         'message': "Learning Dynamic URL's"
     }
+
+@app.get('/courses/{course_id}')
+def get_course_by_id(course_id: str):
+    return {
+        "course_id": course_id,
+        "message": f"Successfully loaded the course details with id = {course_id}"
+    }
+
+
