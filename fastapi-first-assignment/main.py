@@ -97,3 +97,10 @@ def get_course_by_id(course_id: str):
     }
 
 
+
+@app.get('/books/{book_id}/author/{author_id}')
+def get_book_by_author_idk(book_id: int, author_id: int):
+    return {
+        "Book_id": book_id,
+        "author_id": author_id
+    }
