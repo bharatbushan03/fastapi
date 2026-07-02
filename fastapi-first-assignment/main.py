@@ -81,3 +81,10 @@ def get_technology():
         "HTTP",
         "Rest API"
     ]
+
+@app.get('/students/{student_id}')
+def get_student_by_id(student_id: int):
+    return {
+        'student_id': student_id,
+        'message': "Learning Dynamic URL's"
+    }
