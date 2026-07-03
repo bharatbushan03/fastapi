@@ -15,7 +15,27 @@ def home():
     return {"message": "Welcome to the Student API"}
 
 @app.get("/students")
-def get_students():
+def get_students(course: str | None = None, city: str | None = None):
+    if course and city:
+        filtered_students = []
+        for student in students:
+            if student["course"].lower() == course.lower() and student["city"].lower() == city.lower():
+                filtered_students.append(student)
+        return filtered_students
+    if course is not None:
+        filtered_students = []
+        for student in students:
+            if student["course"].lower() == course.lower():
+                filtered_students.append(student)
+        return filtered_students
+    
+    if city is not None:
+        filtered_students = []
+        for student in students:
+            if student["city"].lower() == city.lower():
+                filtered_students.append(student)
+
+        return filtered_students
     return students
 
 @app.get("/students/topper")
