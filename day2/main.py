@@ -10,6 +10,17 @@ students = [
     {"id": 5, "name": "Meena", "course": "FastAPI", "city": "Chennai"  }
 ]
 
+products = [
+    {"id": 1, "name": "Asus", "category": "Electronics", "price": 50000},
+    {"id": 2, "name": "Dell", "category": "Electronics", "price": 60000},
+    {"id": 3, "name": "iPhone", "category": "Mobiles", "price": 80000},
+    {"id": 4, "name": "Samsung TV", "category": "Electronics", "price": 45000},
+    {"id": 5, "name": "Nike Shoes", "category": "Fashion", "price": 5000},
+    {"id": 6, "name": "Office Chair", "category": "Furniture", "price": 12000},
+    {"id": 7, "name": "Water Bottle", "category": "Kitchen", "price": 500},
+    {"id": 8, "name": "Notebook", "category": "Stationery", "price": 100}
+]
+
 @app.get('/')
 def home():
     return {"message": "Welcome to the Student API"}
@@ -51,3 +62,19 @@ def get_student_by_id(student_id: int):
         if student["id"] == student_id:
             return student
     raise HTTPException(status_code = 404, detail = "Student not found")
+
+
+# /products
+# /products?category=Electronics
+# /products?category=Food
+
+@app.get("/products")
+def get_products(category: str | None = None):
+    if category is not None:
+        filtered_products = []
+        for product in products:
+            if product["category"].lower() == category.lower():
+                filtered_products.append(product)
+
+        return filtered_products
+    return products
